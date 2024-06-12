@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController languageController = TextEditingController();
 
   void translate(String src, String dest, String input) async {
-    GoogleTranslator translator = new GoogleTranslator();
+    GoogleTranslator translator = GoogleTranslator();
     var translation = await translator.translate(input, from: src, to: dest);
     setState(() {
       output = translation.text.toString();
@@ -70,18 +70,18 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   DropdownButton(
                     focusColor: Colors.white,
-                    iconDisabledColor: Colors.white,
-                    iconEnabledColor: Colors.white,
+                    iconDisabledColor: blueClr,
+                    iconEnabledColor: blueClr,
                     hint: Text(
                       originLanguage,
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: blueClr,fontWeight: FontWeight.w600),
                     ),
                     dropdownColor: blueClr,
                     icon: const Icon(Icons.keyboard_arrow_down),
                     items: languages.map((String dropDownStringItem) {
                       return DropdownMenuItem(
                         value: dropDownStringItem,
-                        child: Text(dropDownStringItem),
+                        child: Text(dropDownStringItem,style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w500),),
                       );
                     }).toList(),
                     onChanged: (String? value) {
@@ -94,6 +94,8 @@ class _HomePageState extends State<HomePage> {
                     width: 40,
                   ),
                   SizedBox(
+                    height: 50,
+                    width: 50,
                     child: Image.asset('assets/app_logo.png'),
                   ),
                   const SizedBox(
@@ -101,18 +103,18 @@ class _HomePageState extends State<HomePage> {
                   ),
                   DropdownButton(
                     focusColor: Colors.white,
-                    iconDisabledColor: Colors.white,
-                    iconEnabledColor: Colors.white,
+                    iconDisabledColor: blueClr,
+                    iconEnabledColor: blueClr,
                     hint: Text(
                       destinationLanguage,
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: blueClr,fontWeight: FontWeight.w600),
                     ),
                     dropdownColor: blueClr,
                     icon: const Icon(Icons.keyboard_arrow_down),
                     items: languages.map((String dropDownStringItem) {
                       return DropdownMenuItem(
                         value: dropDownStringItem,
-                        child: Text(dropDownStringItem),
+                        child: Text(dropDownStringItem,style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w500),),
                       );
                     }).toList(),
                     onChanged: (String? value) {
@@ -127,27 +129,36 @@ class _HomePageState extends State<HomePage> {
                 height: 40,
               ),
               Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(12),
                 child: TextFormField(
                   cursorColor: blueClr,
                   autofocus: false,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
+                  style: const TextStyle(color: blueClr, fontWeight: FontWeight.w700),
+                  decoration: InputDecoration(
                     labelText: 'Please Enter Your Text',
-                    labelStyle: TextStyle(fontSize: 15, color: Colors.white),
+                    labelStyle: const TextStyle(fontSize: 15, color: blueClr, fontWeight: FontWeight.w700),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: blueClr,
-                        width: 1,
+                        width: 2,
                       ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    focusedBorder:OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: blueClr,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: blueClr,
-                        width: 1,
+                        width: 2,
                       ),
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    errorStyle: TextStyle(color: Colors.red, fontSize: 15),
+                    errorStyle: const TextStyle(color: Colors.red, fontSize: 15),
                   ),
                   controller: languageController,
                   validator: (value) {
@@ -159,16 +170,20 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8),
-                child: ElevatedButton(
-                  onPressed: () {
-                    translate(
-                        getLanguageCode(originLanguage),
-                        getLanguageCode(destinationLanguage),
-                        languageController.text.toString());
-                  },
-                  style: ElevatedButton.styleFrom(backgroundColor: blueClr),
-                  child: const Text("Translate"),
+                padding: const EdgeInsets.all(12),
+                child: SizedBox(
+                  height: 40,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      translate(
+                          getLanguageCode(originLanguage),
+                          getLanguageCode(destinationLanguage),
+                          languageController.text.toString());
+                    },
+                    style: ElevatedButton.styleFrom(backgroundColor: blueClr),
+                    child: const Text("Translate",style: TextStyle(color: Colors.white, fontSize: 18),),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -177,8 +192,8 @@ class _HomePageState extends State<HomePage> {
                Text(
                 "\n$output",
                 style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
+                  color: blueClr,
+                  fontSize: 36,
                   fontWeight: FontWeight.bold,
                 ),
               )
